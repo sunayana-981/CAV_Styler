@@ -127,9 +127,49 @@
   </section>
 
   <div class="item item-fullbody">
-    <img src="static/images/teaser.jpeg" id="fullbody" width="50%" height="50%" alt="CAV Styler teaser">
-    
+    <img
+      id="teaserImage"
+      src="./static/images/teaser.jpeg"
+      alt="CAV Styler teaser"
+      style="display:block; margin: 0 auto; max-width: 50%; height: auto;"
+    />
+    <p id="teaserImageError" style="display:none; text-align:center; margin-top:0.75rem;">
+      Teaser image not found. Check that it exists under <code>static/images/</code> and that the filename/case matches.
+    </p>
   </div>
+
+  <script>
+    // Try common teaser filenames/extensions to avoid silent failures from mismatched assets.
+    (function () {
+      const img = document.getElementById('teaserImage');
+      const err = document.getElementById('teaserImageError');
+      if (!img) return;
+
+      const candidates = [
+        './static/images/teaser.jpeg',
+        './static/images/teaser.jpg',
+        './static/images/teaser.png',
+        './static/images/Teaser.jpeg',
+        './static/images/Teaser.jpg',
+        './static/images/Teaser.png'
+      ];
+
+      let idx = 0;
+
+      function tryNext() {
+        idx += 1;
+        if (idx >= candidates.length) {
+          if (err) err.style.display = 'block';
+          return;
+        }
+        img.onerror = null; // prevent recursion while swapping src
+        img.src = candidates[idx];
+        img.onerror = tryNext;
+      }
+
+      img.onerror = tryNext;
+    })();
+  </script>
 
 
 
