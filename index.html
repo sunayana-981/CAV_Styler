@@ -129,44 +129,75 @@
   <div class="item item-fullbody">
     <img
       id="teaserImage"
-      src="static/images/teaser.png"
+      src="./static/images/teaser.png"
       alt="CAV Styler teaser"
       style="display:block; margin: 0 auto; max-width: 50%; height: auto;"
     />
     <p id="teaserImageError" style="display:none; text-align:center; margin-top:0.75rem;">
-      Teaser image not found. Check that it exists under <code>static/images/</code> and that the filename/case matches.
+      Teaser image failed to load. See debug details below.
     </p>
+    <pre id="teaserImageDebug" style="display:none; max-width: 900px; margin: 0.75rem auto 0; white-space: pre-wrap;"></pre>
   </div>
 
   <script>
-    // Try common teaser filenames/extensions to avoid silent failures from mismatched assets.
     (function () {
       const img = document.getElementById('teaserImage');
       const err = document.getElementById('teaserImageError');
+      const dbg = document.getElementById('teaserImageDebug');
       if (!img) return;
 
-      const candidates = [
-        './static/images/teaser.jpeg',
-        './static/images/teaser.jpg',
+      const baseCandidates = [
         './static/images/teaser.png',
-        './static/images/Teaser.jpeg',
+        './static/images/teaser.jpg',
+        './static/images/teaser.jpeg',
+        './static/images/Teaser.png',
         './static/images/Teaser.jpg',
-        './static/images/Teaser.png'
+        './static/images/Teaser.jpeg'
       ];
+
+      const cacheBust = () => `v=${Date.now()}`;
+      const withBust = (u) => (u.includes('?') ? `${u}&${cacheBust()}` : `${u}?${cacheBust()}`);
 
       let idx = 0;
 
+      async function headInfo(url) {
+        try {
+          const res = await fetch(url, { method: 'HEAD', cache: 'no-store' });
+          return { url, status: res.status, ok: res.ok, contentType: res.headers.get('content-type') };
+        } catch (e) {
+          return { url, status: 'ERR', ok: false, contentType: null, error: String(e) };
+        }
+      }
+
+      async function showDiagnostics() {
+        if (!dbg) return;
+        const checks = await Promise.all(baseCandidates.map(u => headInfo(withBust(u))));
+        const lines = checks.map(c => {
+          const ct = c.contentType ? ` ct=${c.contentType}` : '';
+          const extra = c.error ? ` err=${c.error}` : '';
+          return `${c.status} ${c.url}${ct}${extra}`;
+        });
+        dbg.textContent =
+          'Teaser debug (HEAD results):\n' +
+          lines.join('\n') +
+          '\n\nIf you see 200 but the image still fails, the file is likely corrupt or the extension/MIME does not match the actual image format.';
+        dbg.style.display = 'block';
+      }
+
       function tryNext() {
         idx += 1;
-        if (idx >= candidates.length) {
+        if (idx >= baseCandidates.length) {
           if (err) err.style.display = 'block';
+          showDiagnostics();
           return;
         }
         img.onerror = null; // prevent recursion while swapping src
-        img.src = candidates[idx];
+        img.src = withBust(baseCandidates[idx]);
         img.onerror = tryNext;
       }
 
+      // Start with a cache-busted initial load too.
+      img.src = withBust(baseCandidates[0]);
       img.onerror = tryNext;
     })();
   </script>
