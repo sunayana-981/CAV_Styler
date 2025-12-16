@@ -1,20 +1,8 @@
-# Prototype Guided Backdoor Defense <!-- TODO: Update title to CAV Styler -->
+# CAV Styler: Making Neural Style Transfer Interpretable andcontrollable
 
-Source code for the website: [Prototype Guided Backdoor Defense
-via Activation Space Manipulation](https://venkatadithya9.github.io/pgbd.github.io/). <!-- TODO: Update link -->
-
-Official implementation of the method: [PGBD](https://github.com/venkatadithya9/PGBD). <!-- TODO: Update link -->
-
-<!--
-## BibTex
-```
-@inproceedings{gupta2023concept,
-        title={Concept Distillation: Leveraging Human-Centered Explanations for Model Improvement},
-        author={Gupta, Avani and Saini, Saurabh and Narayanan, PJ},
-        booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
-        year={2023}
-      }
-``` -->
+Source code for the website: CAV Styler: Making Neural Style Transfer Interpretable and
+controllable
+(https://sunayana-981.github.io/CAV_Styler/)
 
 ## License
 
