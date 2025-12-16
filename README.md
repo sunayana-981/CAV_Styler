@@ -1,4 +1,4 @@
-# CAV Styler: Making Neural Style Transfer Interpretable andcontrollable
+# CAV Styler: Making Neural Style Transfer Interpretable and controllable
 
 Source code for the website: CAV Styler: Making Neural Style Transfer Interpretable and
 controllable
