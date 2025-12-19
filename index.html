@@ -3,8 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="CAV Styler- Making Neural Style Transfer Interpretable and Controllable"> <!-- TODO: Update description for CAV Styler -->
-  <meta name="keywords" content="Style Transfer, Activation Space Manipulation, XAI"> <!-- TODO: Update keywords for CAV Styler -->
+  <meta name="description" content="CAV Styler- Making Neural Style Transfer Interpretable and Controllable">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CAV Styler</title>
 
@@ -104,7 +103,7 @@
 <!-- <iframe width="560" height="315" src="https://www.youtube.com/watch?v=0uFH0Or8klM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
 <video width="560" height="315" controls>
   <!-- TODO: Update video source -->
-  <source src="static/videos/pgbd_explanation.mp4" type="video/mp4">
+  <source src="static/videos/ICVGIP_presentation.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
@@ -153,7 +152,7 @@
       <!-- Image 1 -->
       <div class="column">
         <div class="content">
-          <img src="static/images/spider_all.png" width="100%">
+          
           <p>A concept-driven formulation for neural style transfer that maps perceptual style attributes (blur, texture, edges, contrast) to explicit Concept Activation Vector directions in transformation space</p>
         </div>
       </div>
@@ -161,7 +160,7 @@
       <!-- Image 2 -->
       <div class="column">
         <div class="content">
-          <img src="static/images/Batch_single.png" width="100%">
+          
           <p>Our method enables smooth, single-parameter, post-hoc control over stylization without retraining, while preserving content structure and remaining compatible with linear style transfer backbones    </p>
          </div>
       </div>
@@ -182,11 +181,9 @@
 
 <div class="item item-fullbody">
   <!-- TODO: Update visualization image and text -->
-  <img src="images/gradcam.png" id="fullbody"  width="50%%" height="50%%">
-  <img src="images/gradcam.png" id="fullbody"  width="50%%" height="50%%">
+  <img src="static/images/drawio.jpeg" id="fullbody"  width="50%%" height="50%%">
   <div class="column" style="text-align: center; width: 50%; margin: 0 auto;">
-  <p><i>Grad-CAM</i> visualizations of clean and backdoored images before and after applying PGBD. The model focuses on the trigger region in the backdoored image before applying PGBD, while after applying PGBD, the model focuses on the relevant object features.</p>
-  </div>
+  <p>As demonstrated above, CAV styler has lesser artifacts and better image quality metrics as well</p>
 
 
   <!-- <section class="section" id="BibTeX">
